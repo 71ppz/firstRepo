@@ -1,0 +1,104 @@
+//Eddie Lopez fist mini program in GitHub.
+//Purpose: Figure out how GitHub works. 
+//Program: Grading program to take students name and grades, along with class avg. 
+//The program will write the info to a file, also allowing the user to open files.
+//09/JAN/2014
+
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+
+//start main
+
+int main()
+
+{
+	char filename[256];
+	char fileRead[256];
+	char userName[50];
+	char userGrade[10];
+	int counter;
+	int x;
+	int openVar;
+	char trashCan[2];
+	int convertTotal;
+	
+	double avgTotal;
+	double total=0;
+
+	string line;
+	
+	
+	cout<<"New file Name: ";
+	cin.getline(filename,256);
+	
+	ofstream fileWrite(filename);
+	
+	cout<<"How many students would you like to enter?: ";
+	cin>>counter;
+	counter = counter;
+	for (x=0; x<counter; x++)
+	{
+			if(fileWrite.is_open())
+	  		{
+			cin.getline(trashCan, 2);
+			cout<<"Enter Student Name: \n";
+			cin.getline(userName, 50);
+		
+	
+			cout<<"\nEnter Student Grade: ";
+			cin.getline(userGrade, 10);
+			
+			convertTotal = atoi(userGrade);
+			total = convertTotal + total;
+			
+			
+		
+		
+	
+			fileWrite<<"Student: "<<userName<<" Grade: "<<userGrade<<"\n "<<endl; 
+			}
+			
+	}
+	avgTotal = total/counter;
+	fileWrite<<"Total Grades Average: "<<avgTotal<<endl;
+	cout<<"\nThe file you created is named: "<<filename<<endl;
+	
+	fileWrite.close();
+	
+	cout<<"Would you like to open a file? Enter 1 for yes, 2 for no:  ";
+	
+	cin>>openVar;
+		if(openVar == 1)
+		{	cin.getline(trashCan, 2);
+			cout<<"Enter file name: ";
+			cin.getline(fileRead, 256);
+			
+			ifstream fileInput(fileRead);
+			
+				if(fileInput.is_open())
+				{
+					while(1)
+					{
+						getline(fileInput, line);
+						
+						if(fileInput.eof())
+						break;
+						cout<<line<<endl;
+					}
+				}else
+				cout<<"\ncan not open file"<<endl;
+				
+		fileInput.close();
+		}else
+		cout<<"\nThank you for using this grading program, Have a nice Day";
+		
+	
+		
+	
+	return 0;
+}
+	
